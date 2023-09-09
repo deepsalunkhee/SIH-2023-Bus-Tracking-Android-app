@@ -1,18 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
 
-const SDselection = ({ navigation }) => {
-  const [pickup, setPickup] = useState(''); // State for pickup input
-  const [dropoff, setDropoff] = useState(''); // State for drop-off input
+const SDselection = ({ route, navigation }) => {
+  const [pickup, setPickup] = useState('');
+  const [dropoff, setDropoff] = useState('');
+
+  // Use useEffect to update the input fields based on route params
+  useEffect(() => {
+    if (route.params?.selectedStopP) {
+      setPickup(route.params.selectedStopP);
+    }
+  }, [route.params?.selectedStopP]);
+
+  useEffect(() => {
+    if (route.params?.selectedStopD) {
+      setDropoff(route.params.selectedStopD);
+    }
+  }, [route.params?.selectedStopD]);
 
   const handlePickupSelection = () => {
-    // Implement your logic for pickup selection here
-    // You can navigate to the pickup selection screen if needed
+    navigation.navigate('StopsP', { selectedStopP: pickup });
   };
 
   const handleDropOffSelection = () => {
-    // Implement your logic for drop-off selection here
-    // You can navigate to the drop-off selection screen if needed
+    navigation.navigate('StopsD', { selectedStopD: dropoff });
+  };
+
+  const handleSeeBuses = () => {
+    console.log('pickup:', pickup);
+    console.log('dropoff:', dropoff);
+    navigation.navigate('Buses', { pickup, dropoff });
   };
 
   return (
@@ -39,6 +56,11 @@ const SDselection = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
+        {/* Display the selected value */}
+        {pickup ? (
+          <Text>Pickup: {pickup}</Text>
+        ) : null}
+
         {/* Drop-off Input Field */}
         <View style={styles.inputContainer}>
           <TextInput
@@ -51,7 +73,16 @@ const SDselection = ({ navigation }) => {
             <Text>Select</Text>
           </TouchableOpacity>
         </View>
+
+        {/* Display the selected value */}
+        {dropoff ? (
+          <Text>Drop-off: {dropoff}</Text>
+        ) : null}
       </View>
+
+      <TouchableOpacity onPress={handleSeeBuses} style={styles.inputButton}>
+        <Text>See Buses</Text>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const Stopselection = () => {
+const Maps = () => {
   return (
     <View>
-      <Text>Stopselection</Text>
+      <Text>Maps</Text>
     </View>
   )
 }
 
-export default Stopselection
+export default Maps

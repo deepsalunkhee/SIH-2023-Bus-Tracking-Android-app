@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity, Modal, FlatList } from
 
 const Cityselection = ({ navigation }) => {
   const [selectedCity, setSelectedCity] = useState('Mumbai');
-  const citiesInHimachalPradesh = ['Shimla', 'Manali', 'Dharamshala', 'Kullu'];
+  const citiesInHimachalPradesh = ['Shimla', 'Manali', 'Dharamshala', 'Kullu','Mumbai'];
   const [isModalVisible, setModalVisible] = useState(false);
 
   const handleCitySelect = (city) => {
