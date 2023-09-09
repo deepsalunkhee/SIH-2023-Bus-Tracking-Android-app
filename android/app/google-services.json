@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1081883273142",
+    "project_id": "yatri2-d2538",
+    "storage_bucket": "yatri2-d2538.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081883273142:android:81b9d14775556458b0c317",
+        "android_client_info": {
+          "package_name": "com.yatri2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1081883273142-44bcogen1mjtijcgq3m7jbvhv3t2js6i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yatri2",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1081883273142-926uagoqnksc1m8u4vjc5l827te48m5s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBO9vlnaP0SRsXaG5VsCuO9f21jGzVj-yM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1081883273142-926uagoqnksc1m8u4vjc5l827te48m5s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
