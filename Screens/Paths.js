@@ -67,33 +67,41 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    color: 'black',
   },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 16,
+    color: 'black',
   },
   timeline: {
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
+    color: 'black',
+
   },
   timelineItem: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 12,
+    color: 'black',
   },
   stopName: {
     fontSize: 16,
     marginRight: 8,
+    color: 'black',
   },
   timeList: {
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
+    color: 'black',
   },
   time: {
     fontSize: 16,
+    color: 'black',
   },
 });
 

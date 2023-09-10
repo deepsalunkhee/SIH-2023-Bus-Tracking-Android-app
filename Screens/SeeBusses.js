@@ -116,13 +116,16 @@ const SeeBusses = (props) => {
   
     const handleCategoryPress = (categoryName) => {
       // Navigate to the maps page with the selected category
+      console.log(categoryName);
       props.navigation.navigate('Maps', { category: categoryName });
+      console.log(categoryName);
     };
   
     const handlePathPress = (categoryName) => {
       // Handle the action for viewing the path here
       // You can navigate to another screen or perform any other action as needed
       props.navigation.navigate('Paths', { category: categoryName });
+     
     };
   
     return (

@@ -62,7 +62,7 @@ const SDselection = ({ route, navigation }) => {
         ) : null}
 
         {/* Drop-off Input Field */}
-        <View style={styles.inputContainer}>
+        <View style={styles.inputContainer} >
           <TextInput
             placeholder="Select Drop-off"
             value={dropoff}
@@ -70,18 +70,18 @@ const SDselection = ({ route, navigation }) => {
             style={styles.input}
           />
           <TouchableOpacity onPress={handleDropOffSelection} style={styles.inputButton}>
-            <Text>Select</Text>
+            <Text >Select</Text>
           </TouchableOpacity>
         </View>
 
         {/* Display the selected value */}
         {dropoff ? (
-          <Text>Drop-off: {dropoff}</Text>
+          <Text style={{color:"black"}}>Drop-off: {dropoff}</Text>
         ) : null}
       </View>
 
       <TouchableOpacity onPress={handleSeeBuses} style={styles.inputButton}>
-        <Text>See Buses</Text>
+        <Text >See Buses</Text>
       </TouchableOpacity>
     </View>
   );
@@ -90,6 +90,7 @@ const SDselection = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    color: 'black',
   },
   upperHalf: {
     flex: 1,
@@ -104,11 +105,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    color: 'black',
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
+    color: 'black',
   },
   input: {
     flex: 1,
@@ -117,12 +120,14 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderRadius: 5,
     paddingHorizontal: 10,
+    color: 'black',
   },
   inputButton: {
     backgroundColor: 'blue',
     padding: 10,
     borderRadius: 5,
     marginLeft: 10,
+    color: 'black',
   },
 });
 
