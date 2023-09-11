@@ -14,7 +14,7 @@ const OTP = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text>OTP</Text>
+      <Text style={{color:"black"}}>OTP</Text>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}

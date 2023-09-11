@@ -20,7 +20,7 @@ const Register = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Registration Page</Text>
+      <Text style={{color:"black"}}>Registration Page</Text>
      
       <TextInput
         placeholder="Mobile Number"
@@ -28,6 +28,7 @@ const Register = ({ navigation }) => {
         onChangeText={handleChange}
         value={mobile}
         keyboardType="numeric"
+        
       />
 
       <Button title="Register & Login" onPress={goToOTP} />
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     marginBottom: 10,
     padding: 10,
+    color: 'black',
   },
 });
 

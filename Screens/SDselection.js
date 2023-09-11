@@ -41,7 +41,7 @@ const SDselection = ({ route, navigation }) => {
 
       {/* Lower Half with Input Fields and Buttons */}
       <View style={styles.lowerHalf}>
-        <Text>Select Options:</Text>
+        <Text  style={{color:"black"}}>Select Options:</Text>
 
         {/* Pickup Input Field */}
         <View style={styles.inputContainer}>
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderRadius: 5,
     paddingHorizontal: 10,
-    color: 'black',
+    color: '#000',
   },
   inputButton: {
     backgroundColor: 'blue',

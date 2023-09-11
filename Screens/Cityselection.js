@@ -1,10 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, Modal, FlatList } from 'react-native';
+import database from '@react-native-firebase/database';
 
 const Cityselection = ({ navigation }) => {
   const [selectedCity, setSelectedCity] = useState('Mumbai');
-  const citiesInHimachalPradesh = ['Shimla', 'Manali', 'Dharamshala', 'Kullu','Mumbai'];
+  const [citiesInHimachalPradesh, setCitiesInHimachalPradesh] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    // Reference to the "Cities" node in the Firebase Realtime Database
+    const citiesRef = database().ref('Cities');
+
+    // Fetch data from the "Cities" node
+    citiesRef
+      .once('value')
+      .then((snapshot) => {
+        // Convert the snapshot to an array of city names
+        const data = snapshot.val();
+        const cityNames = Object.values(data || {});
+        setCitiesInHimachalPradesh(cityNames);
+        console.log('Data from Firebase:', cityNames);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
 
   const handleCitySelect = (city) => {
     setSelectedCity(city);
@@ -14,7 +34,6 @@ const Cityselection = ({ navigation }) => {
   const toSDselection = () => {
     navigation.navigate('SDselection');
   };
-
   return (
     <View style={styles.container}>
     
@@ -23,9 +42,9 @@ const Cityselection = ({ navigation }) => {
       </View>
 
       <View style={styles.lowerHalf}>
-        <Text>Select City:</Text>
+        <Text style={{color:"black"}}>Select City:</Text>
         <TouchableOpacity onPress={() => setModalVisible(true)} style={styles.dropdown}>
-          <Text>{selectedCity}</Text>
+          <Text  style={{color:"black"}}>{selectedCity}</Text>
         </TouchableOpacity>
       </View>
 
@@ -41,17 +60,18 @@ const Cityselection = ({ navigation }) => {
               data={citiesInHimachalPradesh}
               renderItem={({ item }) => (
                 <TouchableOpacity onPress={() => handleCitySelect(item)} style={styles.modalItem}>
-                  <Text>{item}</Text>
+                  <Text style={{color:"black"}}>{item}</Text>
                 </TouchableOpacity>
               )}
               keyExtractor={(item) => item}
             />
-            <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.modalCloseButton}>
-              <Text>Close</Text>
+            <TouchableOpacity onPress={() => setModalVisible(false)} style={styles.homeButton}>
+              <Text style={styles.homeButtonText}>Close</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
+
 
       <TouchableOpacity onPress={toSDselection} style={styles.homeButton}>
         <Text style={styles.homeButtonText}>Home</Text>

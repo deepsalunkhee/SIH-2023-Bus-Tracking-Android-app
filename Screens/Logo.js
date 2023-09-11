@@ -12,7 +12,7 @@ const Logo = ({ navigation }) => {
       
       <Image source={require('./assets/logo.png')} style={styles.logo} />
 
-      <Text>Welcome Yatri</Text>
+      <Text style={{color:"black"}}>Welcome Yatri</Text>
 
       <TouchableOpacity onPress={goToRegistration} style={styles.registerButton}>
         <Text style={styles.buttonText}>Register & Login</Text>
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
   logo: {
     width: 200, 

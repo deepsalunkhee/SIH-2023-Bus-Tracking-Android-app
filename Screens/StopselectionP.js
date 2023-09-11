@@ -36,7 +36,7 @@ const StopselectionP = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Stop Selection</Text>
+      <Text style={{color:"black"}}>Stop Selection</Text>
       <TextInput
         placeholder="Search Stops"
         value={searchText}
@@ -50,7 +50,7 @@ const StopselectionP = ({ navigation }) => {
           onPress={() => handleStopSelect(item)}
           
            style={styles.stopItem}>
-            <Text>{item}</Text>
+            <Text style={{color:"black"}}>{item}</Text>
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item}
@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
+    color: 'black',
   },
   stopItem: {
     borderWidth: 1,
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
+    color: 'black',
   },
   selectButton: {
     backgroundColor: 'blue',
