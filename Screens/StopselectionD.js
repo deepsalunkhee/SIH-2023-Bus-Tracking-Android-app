@@ -1,20 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { View, Text, FlatList, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import database from '@react-native-firebase/database';
 
-const StopselectionD = ({ navigation}) => {
+const StopselectionD = ({ route,navigation }) => {
   const [searchText, setSearchText] = useState('');
-  const [stops, setStops] = useState([
-    'A',
-    'B',
-    'C',
-    'X',
-    'Y',
-    'Z',
   
-  ]);
+  const [stops, setStops] = useState([]);
   const [selectedStopD, setSelectedStopD] = useState('');
+  const selectedCity = route.params?.selectedCity;
+  
+  useEffect(() => {
+    // Reference to the selected city's stops in the Firebase Realtime Database
+    const cityStopsRef = database().ref(`Stops/Cities/${selectedCity}`);
 
- 
+    // Fetch data from the selected city's stops
+    cityStopsRef
+      .once('value')
+      .then((snapshot) => {
+        // Convert the snapshot to an array of stop names
+        const data = snapshot.val();
+        if (data) {
+          const stopNames = Object.values(data).filter(stop => stop !== null);
+          setStops(stopNames);
+          console.log('Stops:', stopNames);
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching stops:', error);
+      });
+  }, [selectedCity]);
 
   const handleStopSelect = (stop) => {
     setSelectedStopD(stop);
@@ -31,12 +45,12 @@ const StopselectionD = ({ navigation}) => {
 
   const returnSelectedStop = () => {
     
-    navigation.navigate('SDselection', { selectedStopD });
+    navigation.navigate('SDselection', { selectedStopD,selectedCity });
   };
 
   return (
     <View style={styles.container}>
-      <Text>Stop Selection</Text>
+      <Text style={{color:"black"}}>Stop Selection</Text>
       <TextInput
         placeholder="Search Stops"
         value={searchText}
@@ -50,7 +64,7 @@ const StopselectionD = ({ navigation}) => {
           onPress={() => handleStopSelect(item)}
           
            style={styles.stopItem}>
-            <Text>{item}</Text>
+            <Text style={{color:"black"}}>{item}</Text>
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item}
@@ -73,6 +87,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
+    color: 'black',
   },
   stopItem: {
     borderWidth: 1,
@@ -80,6 +95,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
+    color: 'black',
   },
   selectButton: {
     backgroundColor: 'blue',

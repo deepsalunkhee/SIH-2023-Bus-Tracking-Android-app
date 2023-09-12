@@ -1,59 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-
-const dummyBusData = {
-  BusCategory1: {
-    route: ['A-B', 'B-C', 'C-D'],
-    Buses: {
-      Bus1: {
-        'x-coordinate': 12.345,
-        'y-coordinate': 67.890,
-        Time: {
-          'A': '12:00',
-          'B': '12:30',
-          'C': '13:00',
-          'D': '13:30',
-        },
-      },
-      Bus2: {
-        'x-coordinate': 34.567,
-        'y-coordinate': 89.012,
-        Time: {
-          'A': '15:00',
-          'B': '15:30',
-          'C': '14:00',
-          'D': '14:30',
-        },
-      },
-    },
-  },
-  // Add more categories here
-};
+import database from '@react-native-firebase/database';
 
 const Paths = (props) => {
-  const category1Data = dummyBusData.BusCategory1.Buses;
-  const mergedTimeData = {};
+  const Category = props.route.params.category;
+  const [CategoryData, setCategoryData] = useState({});
 
-  // Merge the time data for the same stops
-  Object.values(category1Data).forEach((bus) => {
-    Object.entries(bus.Time).forEach(([stop, time]) => {
-      if (!mergedTimeData[stop]) {
-        mergedTimeData[stop] = [];
-      }
-      mergedTimeData[stop].push(time);
+  useEffect(() => {
+    // Fetch bus data from Firebase Realtime Database
+    const busCategoryRef = database().ref(`Location/Catagory/${Category}`);
+
+    busCategoryRef.once('value', (snapshot) => {
+      const selectedBuses = snapshot.val();
+
+      // Create a new object to organize the data by stops
+      const stopsData = {};
+
+      // Iterate through buses and their stops
+      Object.entries(selectedBuses).forEach(([Number, Info]) => {
+        Object.entries(Info.Time).forEach(([stop, time]) => {
+          if (!stopsData[stop]) {
+            stopsData[stop] = [];
+          }
+          stopsData[stop].push({ busNumber: Number, time });
+        });
+      });
+
+      // Set the organized data in the state
+      setCategoryData(stopsData);
     });
-  });
+  }, [Category]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Vertical Timeline</Text>
+      <Text style={styles.title}>Bus Timelines</Text>
       <View style={styles.timeline}>
-        {Object.entries(mergedTimeData).map(([stop, times], index) => (
+        {Object.entries(CategoryData).map(([stop, buses], index) => (
           <View key={index} style={styles.timelineItem}>
-            <Text style={styles.stopName}>{`'${stop}'`}</Text>
+            <Text style={styles.stopName}>{`Stop ${stop}`}</Text>
             <View style={styles.timeList}>
-              {times.map((time, timeIndex) => (
-                <Text key={timeIndex} style={styles.time}>{time}</Text>
+              {buses.map((bus, timeIndex) => (
+                <Text key={timeIndex} style={styles.time}>{`Bus ${bus.busNumber}: ${bus.time}`}</Text>
               ))}
             </View>
           </View>
@@ -80,17 +67,16 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     color: 'black',
-
   },
   timelineItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'column',
     marginBottom: 12,
     color: 'black',
   },
   stopName: {
     fontSize: 16,
-    marginRight: 8,
+    fontWeight: 'bold',
+    marginBottom: 8,
     color: 'black',
   },
   timeList: {

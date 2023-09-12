@@ -19,7 +19,7 @@ const Cityselection = ({ navigation }) => {
         const data = snapshot.val();
         const cityNames = Object.values(data || {});
         setCitiesInHimachalPradesh(cityNames);
-        console.log('Data from Firebase:', cityNames);
+        
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -32,7 +32,8 @@ const Cityselection = ({ navigation }) => {
   };
 
   const toSDselection = () => {
-    navigation.navigate('SDselection');
+    navigation.navigate('SDselection',{selectedCity});
+    
   };
   return (
     <View style={styles.container}>

@@ -35,7 +35,11 @@ const App = () => {
   }, []);
   return (
     <NavigationContainer>
-    <Stack.Navigator >
+    <Stack.Navigator 
+    screenOptions={{
+      headerShown: false
+    }}
+    >
       <Stack.Screen name="Logo"  component={Logo} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="OTP" component={OTP} />

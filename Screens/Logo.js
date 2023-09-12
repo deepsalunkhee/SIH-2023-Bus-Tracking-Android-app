@@ -10,9 +10,9 @@ const Logo = ({ navigation }) => {
   return (
     <View style={styles.container}>
       
-      <Image source={require('./assets/logo.png')} style={styles.logo} />
+      <Image source={require('./assets/Logo1.png')} style={styles.logo} />
 
-      <Text style={{color:"black"}}>Welcome Yatri</Text>
+      <Text style={styles.welcomeText}>Welcome Yatri</Text>
 
       <TouchableOpacity onPress={goToRegistration} style={styles.registerButton}>
         <Text style={styles.buttonText}>Register & Login</Text>
@@ -26,24 +26,33 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    
+    backgroundColor: '#00FA9A', // Set the background color to green
   },
   logo: {
     width: 200, 
     height: 200,
     resizeMode: 'contain',
+    borderRadius: 50,
+  },
+  welcomeText: {
+    color: '#006400', // Set the text color to white
+    fontSize: 24, // Increase the font size for emphasis
+    fontWeight: 'bold',
+    marginTop: 20,
   },
   registerButton: {
-    backgroundColor: 'blue', // Change the background color to your preferred color
+    backgroundColor: '#006400', // Change the background color to blue
     padding: 10,
     borderRadius: 5,
     marginTop: 20,
   },
   buttonText: {
-    color: 'white', // Change the text color to contrast with the background
+    color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
   },
 });
+
+
 
 export default Logo;

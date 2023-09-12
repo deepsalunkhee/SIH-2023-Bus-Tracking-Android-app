@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
 
 const SDselection = ({ route, navigation }) => {
+  const selectedCity  = route.params?.selectedCity;
+  
   const [pickup, setPickup] = useState('');
   const [dropoff, setDropoff] = useState('');
-
+  
   // Use useEffect to update the input fields based on route params
   useEffect(() => {
     if (route.params?.selectedStopP) {
@@ -19,11 +21,11 @@ const SDselection = ({ route, navigation }) => {
   }, [route.params?.selectedStopD]);
 
   const handlePickupSelection = () => {
-    navigation.navigate('StopsP', { selectedStopP: pickup });
+    navigation.navigate('StopsP', { selectedStopP: pickup ,selectedCity});
   };
 
   const handleDropOffSelection = () => {
-    navigation.navigate('StopsD', { selectedStopD: dropoff });
+    navigation.navigate('StopsD', { selectedStopD: dropoff ,selectedCity});
   };
 
   const handleSeeBuses = () => {
