@@ -54,12 +54,13 @@ const SeeBusses = (props) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.Head}>Route :{pickup}-{drop}</Text>
       <FlatList
         data={busData}
         keyExtractor={(item) => item.categoryName}
         renderItem={({ item }) => (
           <View style={styles.card}>
-            <Text style={{color:"black"}}>Bus:{item.categoryName}</Text>
+            <Text style={styles.categoryName}>Bus:{item.categoryName}</Text>
             <View style={styles.buttonContainer}>
               <TouchableOpacity
                 style={[styles.button, styles.mapButton]}
@@ -84,22 +85,28 @@ const SeeBusses = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:"#88F3F8"
   },
   card: {
-    backgroundColor: 'white',
+    backgroundColor: '#C0FA82',
     borderRadius: 10,
     elevation: 5,
     padding: 16,
     margin: 8,
+
   },
   categoryName: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: 'black',
+
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
+    backgroundColor:"#C0FA82"
+    
   },
   button: {
     borderRadius: 5,
@@ -120,6 +127,16 @@ const styles = StyleSheet.create({
   pathButton: {
     backgroundColor: 'green', // Customize the button styles
   },
+  Head: {
+    color: 'white', // White text color
+    fontSize: 18,
+    fontWeight: 'bold', // Bold text
+    textAlign: 'center', // Center the text
+    backgroundColor: 'green', // Green background color
+    padding: 10, // Add some padding
+    marginBottom: 10, // Add some margin bottom
+    borderRadius: 10, // Round the corners
+  }
 });
 
 export default SeeBusses;

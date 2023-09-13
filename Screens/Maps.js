@@ -15,8 +15,8 @@ const Maps = (props) => {
   
   const [busCoordinates, setBusCoordinates] = useState([]);
   const [userLocation, setUserLocation] = useState({
-    latitude: 18.988470948071694, 
-    longitude: 72.84292203394,
+    latitude: 20.988470948071694, 
+    longitude: 50.84292203394,
   });
 
 
@@ -41,9 +41,10 @@ const Maps = (props) => {
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         console.log('Location permission granted');
-        
+        getCurrentLocation();
       } else {
         console.log('Location permission denied');
+        getCurrentLocation();
       }
     } catch (err) {
       console.warn(err);
@@ -63,12 +64,27 @@ const Maps = (props) => {
       {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
     );
   };
+  
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     console.log("Hi" + userLocation.longitude);
+  //   }, 10000); // Logs every 10 seconds
+  
+  //   // Clear interval on re-render to avoid memory leaks
+  //   return () => clearInterval(intervalId);
+  // }, [userLocation]); // Executes every time the userLocation changes
+
+  useEffect(() => {
+    console.log("Hi" + userLocation.longitude);
+  }, [userLocation]); // Executes every time the userLocation changes
+  
+  
 
 
   useEffect(() => {
     // Fetch bus data from Firebase Realtime Database
     const busCategoryRef = database().ref(`Location/Catagory/${Category}`);
-    getCurrentLocation();
+    
     
     busCategoryRef.once('value', (snapshot) => {
       const selectedBuses = snapshot.val();
@@ -93,7 +109,9 @@ const Maps = (props) => {
 
   return (
     <View style={styles.container}>
+      
       <MapView
+        
         style={styles.map}
         initialRegion={{
           latitude: userLocation.latitude,

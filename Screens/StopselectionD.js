@@ -50,9 +50,10 @@ const StopselectionD = ({ route,navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{color:"black"}}>Stop Selection</Text>
+      <Text style={styles.Head}>Stop Selection</Text>
       <TextInput
         placeholder="Search Stops"
+        placeholderTextColor={'gray'}
         value={searchText}
         onChangeText={handleSearch}
         style={styles.searchInput}
@@ -69,8 +70,8 @@ const StopselectionD = ({ route,navigation }) => {
         )}
         keyExtractor={(item) => item}
       />
-      <TouchableOpacity onPress={returnSelectedStop} style={styles.selectButton}>
-        <Text>Select</Text>
+      <TouchableOpacity onPress={returnSelectedStop} style={styles.Button}>
+        <Text style={styles.ButtonText}>Select</Text>
       </TouchableOpacity>
     </View>
   );
@@ -80,30 +81,51 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    backgroundColor:"#88F3F8"
+    
   },
   searchInput: {
-    borderWidth: 1,
-    borderColor: 'gray',
+    borderWidth: 3,
+    borderColor: 'black',
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
     color: 'black',
   },
   stopItem: {
-    borderWidth: 1,
-    borderColor: 'lightgray',
+    borderWidth: 2,
+    borderColor: 'balck',
     borderRadius: 5,
     padding: 10,
     marginBottom: 10,
     color: 'black',
   },
-  selectButton: {
-    backgroundColor: 'blue',
+  Button: {
+    backgroundColor: '#006400', // Green button background color
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 10,
     alignItems: 'center',
-    justifyContent: 'center',
+    width: '80%',
+    alignSelf: 'center', // Center horizontally within the lowerHalf view
+    position: 'absolute', // Position it absolutely to the bottom
+    bottom: 10, // Adjust the bottom position as needed
   },
+  ButtonText: {
+    color: 'white', // White button text color
+    fontSize: 18,
+    fontWeight: 'bold', // Bold text
+  },
+  Head: {
+    color: 'white', // White text color
+    fontSize: 18,
+    fontWeight: 'bold', // Bold text
+    textAlign: 'center', // Center the text
+    backgroundColor: 'green', // Green background color
+    padding: 10, // Add some padding
+    marginBottom: 10, // Add some margin bottom
+    borderRadius: 10, // Round the corners
+  }
+  
 });
 
 export default StopselectionD;

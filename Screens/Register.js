@@ -48,22 +48,24 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#00FA9A', // Green background color
+    backgroundColor: '#88F3F8', // Green background color
   },
   title: {
     color: '#006400', // Green text color
     fontSize: 20,
     marginBottom: 20,
+    fontWeight: 'bold',
   },
   input: {
     width: '80%',
     height: 40,
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: '#009688', // Teal border color
+    borderColor: 'black', // Teal border color
     marginBottom: 10, // Decreased margin
     padding: 10,
     color: 'black',
+    backgroundColor: '#4FF9B1', // White background color
   },
   button: {
     backgroundColor: '#006400', // Green button background color

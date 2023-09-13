@@ -12,13 +12,17 @@ const Paths = (props) => {
 
     busCategoryRef.once('value', (snapshot) => {
       const selectedBuses = snapshot.val();
+      console.log('Selected buses:', selectedBuses);
 
       // Create a new object to organize the data by stops
       const stopsData = {};
 
       // Iterate through buses and their stops
       Object.entries(selectedBuses).forEach(([Number, Info]) => {
-        Object.entries(Info.Time).forEach(([stop, time]) => {
+        // Convert Time object to array and sort by time
+        const sortedTimes = Object.entries(Info.Time).sort((a, b) => a[1].localeCompare(b[1]));
+
+        sortedTimes.forEach(([stop, time]) => {
           if (!stopsData[stop]) {
             stopsData[stop] = [];
           }
@@ -33,9 +37,9 @@ const Paths = (props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Bus Timelines</Text>
+      <Text style={styles.title}>Bus {Category} Route</Text>
       <View style={styles.timeline}>
-        {Object.entries(CategoryData).map(([stop, buses], index) => (
+        {Object.entries(CategoryData).sort((a, b) => a[0] - b[0]).map(([stop, buses], index) => (
           <View key={index} style={styles.timelineItem}>
             <Text style={styles.stopName}>{`Stop ${stop}`}</Text>
             <View style={styles.timeList}>
@@ -55,12 +59,17 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     color: 'black',
+    backgroundColor: '#88F3F8',
   },
   title: {
+    color: 'white', // White text color
     fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 16,
-    color: 'black',
+    fontWeight: 'bold', // Bold text
+    textAlign: 'center', // Center the text
+    backgroundColor: 'green', // Green background color
+    padding: 10, // Add some padding
+    marginBottom: 10, // Add some margin bottom
+    
   },
   timeline: {
     flexDirection: 'column',
@@ -70,6 +79,12 @@ const styles = StyleSheet.create({
   },
   timelineItem: {
     flexDirection: 'column',
+    backgroundColor: '#C0FA82',
+    width: '100%',
+    padding: 16,
+    borderRadius: 10,
+    borderBlockColor: 'black',
+    borderWidth: 1,
     marginBottom: 12,
     color: 'black',
   },
